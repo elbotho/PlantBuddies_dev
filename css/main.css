@@ -204,8 +204,8 @@ h4 {
   .input-wrap {
     float: left;
   }
-  p.note {
-    margin-top: -2rem;
+  div.note {
+    margin-top: -4rem;
     margin-bottom:3rem;
   } 
   #results {
@@ -307,7 +307,7 @@ a:hover {
 }
 
 .typeahead:focus {
-  border: 2px solid #0097cf;
+  border: 2px solid #c99;
 }
 
 .tt-query {
@@ -344,12 +344,12 @@ a:hover {
 .tt-suggestion:hover {
   cursor: pointer;
   color: #fff;
-  background-color: #0097cf;
+  background-color: #c99;
 }
 
 .tt-suggestion.tt-cursor {
   color: #fff;
-  background-color: #0097cf;
+  background-color: #c99;
 
 }
 
@@ -360,4 +360,8 @@ a:hover {
 .input-wrap .tt-menu{
 	max-height: 20rem;
 	overflow-y: auto;
+}
+
+.gray {
+  opacity: .54;
 }

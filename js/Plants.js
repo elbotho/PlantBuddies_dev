@@ -20,7 +20,9 @@ function Plants(){
 
 		html += getMainImage(suggestion.id);
 
-		html += '<p class="note">'+suggestion.note+'</p>';
+		html += '<div class="note">';
+		if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p><br>';
+		html += '<p>'+suggestion.note+'</div>';
 
 		if(result.length === 0) {
 			console.log("sorry, no hits.");
