@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="no-js" lang="de">
+<head>
+	<title>Plant Buddies</title>
+	<meta charset="utf-8">
+
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/typeahead.jquery.min.js"></script>
+	<script src="js/Language.js"></script>
+	<script src="js/Events.js"></script>
+	<script src="js/Input.js"></script>
+	<script src="js/Plants_admin.js"></script>
+
+	<script src="data/plants-data.js"></script>
+	<script src="data/relations-data.js"></script>
+
+	<script src="js/main.js"></script>
+
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+ 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href='https://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<style type="text/css">
+ 		#admin-panel {
+		 	position: absolute;
+		 	right: 2rem;
+		 	top:1rem;
+		 	z-index: 2;
+
+		 	width: 15rem;
+		 }	
+
+		#new-plant-input {
+			width:10rem;
+		}
+
+		.content{
+			width: 100%;
+		}
+
+		body {
+			background-color: #fff;
+/* 			padding: 2rem;
+    		text-align: right;
+
+    		padding-bottom: 15rem;		
+ */		}
+
+		div.edit {
+			font-family: sans-serif;
+			font-size:12px;
+		}
+		.edit-cell, .edit-cell.good, .edit-cell.bad{
+			padding:1rem;
+			margin:0.2rem 2rem 0.2rem 0;
+			/* float:left; */
+			width: 100%;
+			/* height: 6rem; */
+			overflow-y: auto;
+		}
+		.edit-cell h3, .edit-cell .edit, .edit-cell textarea{
+			float: left;
+			margin-left: 2rem;
+		}
+		.edit-cell h3 {
+			margin-left: 0;
+		}
+
+		textarea {
+			height: 3rem;
+			width: 9.5rem;
+			resize: vertical;
+		}
+		.note textarea {
+			height: 5rem;
+			width: 20rem;
+		}
+
+		#add-rel{
+			background-color: #ddf;
+			cursor: pointer;
+			text-align: center;
+		}
+
+		.good div a, .bad div a{
+			color: #333; 
+		}
+		.edit-cell {
+			background-color: #eee;
+		}
+		.good {
+			background-color: #f7ffee;
+		}
+		.bad{
+			background-color: #fff5f5;
+		}
+
+		.edit a:before{content:"[";}
+		.edit a:after{content:"]";}
+		.edit a:hover {font-weight: bold;}
+/* 		.edit a:hover:before{content:"(";}
+		.edit a:hover:after{content:")";}
+ */
+		  p.note {
+		  	margin-bottom: 0;
+		  }
+
+		 #save {
+		 	background-color: #77f;
+		 	color: #fff;
+		 }
+
+/* 		 #unicorn{
+		 	background: url('img/unicorn.jpg') repeat-x bottom right ;
+		 	background-size: 5rem;
+
+		 	width:100%;
+		 	height:5rem;
+		 	
+		 	position: absolute;
+		 	left:0;
+		 	bottom: -50%;
+		 	z-index: -1;
+		 } */
+	</style>
+
+</head>
+
+<body>	
+		<div id="admin-panel">
+			<pre id="log">ready to edit…</pre>
+			<input type="text" name="new-plant-input" placeholder="New Plant" id="new-plant-input">
+			<input type="button" name="new-plant" value="Add" id="new-plant"/>
+			<p>	<input type="button" name="save" value="Save all Changes!" id="save"/> </p>
+		</div>
+
+
+		<div class="content">
+			<h3>edit-mode</h3>
+			<form action="#">
+			    <div class="input-wrap">
+			      <input id="plant-input" class="typeahead" type="text" placeholder="lonely plant here">
+			    </div>
+			    <!-- <button type="submit">Go</button> -->
+			</form>
+
+			<div id="results">
+				<div class="default"></div>
+			</div>
+
+		</div>
+
+		<div id="unicorn">
+			&nbsp;
+		</div>
+
+</body>
+</html>
