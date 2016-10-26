@@ -26,7 +26,7 @@ function Events(){
 		    gEvents.loadFromHash(href);
 		});
 
-		$("#results .about-link").click(function() {
+		$("#results .about-link, #home-link, #about-link").click(function(e) {
 		    e.preventDefault();
 		    gEvents.loadStartPage();
 		});
@@ -37,20 +37,24 @@ function Events(){
 	}
 
 	this.removeHash = function(){
-        history.pushState(null, null, '');
+        //history.pushState(null, null, '');
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+
 	}
 
 	this.loadFromHash = function(hash) {
 	    hash = hash.substr(1);
 	    if(hash.length>1) $('#results .default').hide();
+	    else {gEvents.loadStartPage(); return false;}
 		var plantObj = $.grep(gPlantData, function(e){ return e.id == hash })[0];
-		if(plantObj === undefined) return false;
+		if(plantObj === undefined) {gEvents.loadStartPage(true); return false;}
 		$('.typeahead').typeahead('val', plantObj.name);
 		gPlants.load(plantObj);
 	}
 
-	this.loadStartPage = function() {
-		this.removeHash();
+	this.loadStartPage = function(keepHash) {
+		if(!keepHash) this.removeHash(); //scroll to buddylist
+		gInput.clearInput();
 		gPlants.reload(defaultHTML);
 	}
 

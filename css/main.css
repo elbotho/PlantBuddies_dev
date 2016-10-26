@@ -220,7 +220,8 @@ h4 {
   .buddy .details {
     font-size:0.85rem;
   }
-  #results:after, hr.clear {
+
+  #results:after, hr.clear{
      content: " ";
      visibility: hidden;
      display: block;
@@ -364,4 +365,58 @@ a:hover {
 
 .gray {
   opacity: .54;
+}
+
+
+
+/* landing start page homepage */
+
+#buddy-grid ul {
+  margin: 0;
+  list-style-type: none;
+}
+#buddy-grid ul li img{
+  height: auto;
+  width: 100%;
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+#buddy-grid ul li:hover img{
+  filter: grayscale(0%);
+  opacity: 1;
+}
+#buddy-grid ul li{
+  display: inline-block;
+  width: 21%;
+  margin-right: 5% 
+}
+#buddy-grid ul li:nth-child(4n){
+  margin-right: 0
+}
+#buddy-grid ul li div{
+  opacity: 0;
+  position: absolute;
+  display: inline-block;
+  background-color: #c99;
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: .05rem .3rem;
+  width: auto;
+  margin-top: 5vw;
+  margin-left: -3.4vw;
+  z-index: 20;
+}
+
+#buddy-grid ul li:hover div {
+  opacity: 0.7;
+}
+
+#buddy-grid ul li div, #buddy-grid ul li img { 
+  transition: all 0.5s ease;
+}
+
+
+
+.backlink a {
+  text-decoration: underline;
 }

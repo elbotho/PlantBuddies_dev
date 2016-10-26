@@ -1,6 +1,6 @@
 function Plants(){
 
-	var container, inputWrap;
+	var container, inputWrap, buddyGrid, buddyGridTitle;
 	var admin = false;
 
     this.init = function(){
@@ -8,7 +8,10 @@ function Plants(){
 
     	container = $("#results");
     	inputWrap = $('div.input-wrap');
+    	buddyGrid = $('#buddy-grid');
+    	buddyGridTitle = $('#buddy-grid-title');
 
+    	fillBuddyGrid();
     }
 
 	this.load = function(suggestion){
@@ -46,7 +49,7 @@ function Plants(){
 		html += '</div><div class="bad"><h3>dislikes</h3>';
 		html += buildRelations(nolikey, result, suggestion);
 
-		html += '</div><h1></h1>';
+		html += '</div><hr class="clear"/> <div class="backlink"><a href="#buddy-grid-title">Show me all the plants</a></div>';
 	  	
 	  	fadeReload(html);
 	}
@@ -114,6 +117,21 @@ function Plants(){
 		}
 
 		return html;
+	}
+
+
+	var fillBuddyGrid = function(){
+
+		//buddyGridTitle.append(' ('+gPlantData.length+')');
+		var html = '<ul>';
+
+		for (var i = 0; i < gPlantData.length; i++) {
+			var id = gPlantData[i].id;
+			if(!plantReady(id,gPlantData[i].note)) continue;
+			html += '<li><a href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
+		}
+
+		buddyGrid.html(html);
 	}
 
 }//Plants
