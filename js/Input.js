@@ -52,6 +52,8 @@ function Input(){
 	    for (var i = 0, len = gPlantData.length; i < len; i++) {
 	    	var name = gPlantData[i].name;
 	    	var altName = gPlantData[i].alt;
+	    	var id = gPlantData[i].id;
+	    	if( !plantReady(id,gPlantData[i].note) ) continue;
 			if (substrRegex.test(name) || substrRegex.test(altName)) {
 				matches.push( gPlantData[i] );
 			}

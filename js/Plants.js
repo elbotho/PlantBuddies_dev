@@ -1,6 +1,7 @@
 function Plants(){
 
 	var container, inputWrap;
+	var admin = false;
 
     this.init = function(){
     	//where did I put the milk?
@@ -51,10 +52,8 @@ function Plants(){
 	}
 
 	var getImageSrc = function(slug){
-		var imagesNames = ["fig","garlic","staranis","amaranth","apple","apricot","asparagus","aubergine","beet","blueberry","borage","broad_bean","broccoli","carrot","cauliflower","chilli_pepper","chinese_cabbage","cucumber","currant","early_cabbage","florence_fennel","jerusalem_artichoke","leek","lemon_balm","lettuce","marrow/courgette","onion","parsnip","pea","pear","potato","radish","raspberry","rhabarber","rosemary","spinach","squash","strawberry","sweet_pepper","swiss_chard","tomato"];
-		var found = $.inArray(slug, imagesNames) > -1;
 		var url = 'img/default.jpg';
-		if(found) url = 'img/plants/'+slug+'.jpg';
+		if( hasImage(slug) ) url = 'img/plants/'+slug+'.jpg';
 		return url;
 	}
 
@@ -79,14 +78,7 @@ function Plants(){
 		container.stop().fadeOut('', function() {
 			container.html(html);
 			initBuddyClick();
-			imageHack();
 		}).fadeIn();
-	}
-
-	var imageHack = function(){
-		$("#main-img, div.details img",container).on("error", function(e){
-			if(this.src!="img/default.jpg") this.src = "img/default.jpg";
-		});
 	}
 
 	var initBuddyClick = function(){

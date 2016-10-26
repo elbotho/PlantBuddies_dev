@@ -6,8 +6,8 @@ $(document).ready(setup);
 
 //obj    
 var gEvents, gInput, gPlants, gLanguage, gCurrentPlantId;
-
 var activeLanguage;
+var imagesNames = ["amaranth","apple","apricot","asparagus","aubergine","basil","bay","beet","blackberry","blueberry","borage","broad_bean","broccoli","brussels_sprouts","carrot","cauliflower","celeriac","celery","cherry","chilli_pepper","chinese_cabbage","citrus_fruits","cucumber","currant","early_cabbage","fig","florence_fennel","garlic","ginger","globe_artichoke","gooseberry","horseradish","jerusalem_artichoke","kale","leek","lemon_balm","lettuce","marrow/courgette","nasturtium","nectarine","onion","parsnip","pea","peach","peanut","pear","plum","potato","quince","radish","raspberry","rhabarber","rose","rosemary","runner_bean","spinach","squash","staranis","strawberry","sweet_pepper","swiss_chard","tomato","walnut","wild_chamomile/scented_mayweed"];
 
 function setup(){
 
@@ -149,6 +149,16 @@ function getCurrentPlantIndex() {
 function getRelationsIndex(id){
     //might not be nessesary but to be sure
     return gRelationsData.findIndex( function(x){ return x.id == id} );
+}
+
+function hasImage(id) {
+    return $.inArray(id, imagesNames) > -1;
+}
+
+function plantReady(id,note){
+    if(gPlants.isAdmin) return true;
+    if( !hasImage(id) || !note ) return false;
+    else return true;
 }
 
 function logger(msg){

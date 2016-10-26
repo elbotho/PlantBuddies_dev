@@ -1,12 +1,17 @@
 function Plants(){
 
 	var container, inputWrap;
+	var admin = true;
 
     this.init = function(){
     	//where did I put the milk?
 
     	container = $("#results");
     	inputWrap = $('div.input-wrap');
+    }
+
+    this.isAdmin = function(){
+    	return admin;
     }
 
 	this.load = function(suggestion){
@@ -21,9 +26,9 @@ function Plants(){
 
 		var html = '';
 		html += getMainImage(suggestion.id);
-
+		if(!suggestion.alt) suggestion.alt = '/'
 		html += '<p class="note"><textarea id="plant-note">'+suggestion.note+'</textarea></p>';
-		html += '<pre><small><b>id</b> '+suggestion.id+' &nbsp;&nbsp; <b>latin</b> '+ suggestion.latin + ' &nbsp;&nbsp; <b>german</b> '+ suggestion.german +'</small></pre>';
+		html += '<pre><small><b>alt-name</b> '+suggestion.alt+' &nbsp;&nbsp; <b>id</b> '+suggestion.id+' &nbsp;&nbsp; <b>latin</b> '+ suggestion.latin + ' &nbsp;&nbsp; <b>german</b> '+ suggestion.german +'</small></pre>';
 
 		if(result.length === 0) {
 			console.log("sorry, no hits.");
@@ -63,12 +68,10 @@ function Plants(){
 
 	  	fadeReload(html);
 	}
-
+	
 	var getImageSrc = function(slug){
-		var imagesNames = ["fig","garlic","staranis","amaranth","apple","apricot","asparagus","aubergine","beet","blueberry","borage","broad_bean","broccoli","carrot","cauliflower","chilli_pepper","chinese_cabbage","cucumber","currant","early_cabbage","florence_fennel","jerusalem_artichoke","leek","lemon_balm","lettuce","marrow/courgette","onion","parsnip","pea","pear","potato","radish","raspberry","rhabarber","rosemary","spinach","squash","strawberry","sweet_pepper","swiss_chard","tomato"];
-		var found = $.inArray(slug, imagesNames) > -1;
 		var url = 'img/default.jpg';
-		if(found) url = 'img/plants/'+slug+'.jpg';
+		if(hasImage(slug)) url = 'img/plants/'+slug+'.jpg';
 		return url;
 	}
 
@@ -104,14 +107,7 @@ function Plants(){
 			container.html(html);
 			//initBuddyClick();
 			resetEvents();
-			imageHack();
 		// }).fadeIn();
-	}
-
-	var imageHack = function(){
-		$("#main-img, div.details img",container).on("error", function(e){
-			if(this.src!="img/default.jpg") this.src = "img/default.jpg";
-		});
 	}
 
 	var initBuddyClick = function(){
