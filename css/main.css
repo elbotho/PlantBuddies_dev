@@ -373,6 +373,10 @@ a:hover {
 
 /* landing start page homepage */
 
+.logo {
+  width: 100%;
+}
+
 #buddy-grid ul {
   margin: 0;
   list-style-type: none;

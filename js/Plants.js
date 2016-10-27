@@ -83,6 +83,7 @@ function Plants(){
 		container.stop().fadeOut('', function() {
 			container.html(html);
 			initBuddyClick();
+			gEvents.initClickEvents();
 		}).fadeIn();
 	}
 

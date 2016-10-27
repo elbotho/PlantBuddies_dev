@@ -6,7 +6,7 @@ function Events(){
 
 		// initKeyEvents();
         initHashEvents();
-        initClickEvents();
+        this.initClickEvents();
 
         defaultHTML = $('#results').html();
     }
@@ -18,10 +18,11 @@ function Events(){
 		});
 	}
 
-	var initClickEvents = function(){
-		$("#results .search-link").click(function() {
+	this. initClickEvents = function(){
+		$("#results a.img-hover").click(function(e) {
 		    e.preventDefault();
 		    var href=$(this).attr("href");
+		    gEvents.updateHash(href.substr(1));
 		    gEvents.loadFromHash(href);
 		});
 
