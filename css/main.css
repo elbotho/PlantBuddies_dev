@@ -393,7 +393,7 @@ a:hover {
 #buddy-grid ul li:nth-child(4n){
   margin-right: 0
 }
-#buddy-grid ul li div{
+#buddy-grid ul li div, .img-hover div{
   opacity: 0;
   position: absolute;
   display: inline-block;
@@ -407,11 +407,20 @@ a:hover {
   z-index: 20;
 }
 
-#buddy-grid ul li:hover div {
+.img-hover div{
+  margin-top: 0;
+  margin-left: 0;
+}
+
+a.img-hover {
+  padding: 0;
+}
+
+#buddy-grid ul li:hover div, .img-hover:hover div {
   opacity: 0.7;
 }
 
-#buddy-grid ul li div, #buddy-grid ul li img { 
+#buddy-grid ul li div, #buddy-grid ul li img, .img-hover div { 
   transition: all 0.5s ease;
 }
 

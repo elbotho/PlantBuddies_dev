@@ -18,7 +18,8 @@ function Plants(){
 
 		if(suggestion === undefined) return false;
 
-		var result = $.grep(gRelationsData, function(e){ return e.plant1 === suggestion.id });
+		// var result = $.grep(gRelationsData, function(e){ return e.plant1 === suggestion.id });
+		var result = $.grep(gRelationsData, function(e){ return e.plant1 == suggestion.id || e.plant2 == suggestion.id  });		
 		 //|| e.plant1 === suggestion.id;
 		var html = '';
 
@@ -39,6 +40,7 @@ function Plants(){
 		for (var i = 0; i < result.length; i++) {
 			if( result[i].state === "good" ) likey.push(result[i]);
 			if( result[i].state === "bad" ) nolikey.push(result[i]);
+			//neutral: out
 		}
 
 		//might like
@@ -98,25 +100,59 @@ function Plants(){
 		var html = '';
 
 		for (var i = 0; i < relationPlants.length; i++) {
-
-			var plantId = relationPlants[i].plant2;
-			//if(suggestion.id === plantId) plantId = result[i].plant2;
-			
-			if(suggestion.id === plantId) continue;
-
-			var plantObj = $.grep(gPlantData, function(e){return e.id == plantId})[0];
-
-			if( plantObj === undefined ) {
-				console.log("error: "+plantId);
-			}
-
-			var comment = '';
-			details = ' <div class="details">' + getBuddyImage(plantId) + relationPlants[i].comment + ' <p><a class="search-link" href="#'+ plantObj.id +'" title="Find companionship for this one!">Find Companions for this one!</a></p></div>';
-
-			html += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">'+ plantObj.name +'</a>' + details + '</div>';
+			html += getOneRelation(relationPlants[i], suggestion);
 		}
 
+
 		return html;
+	}
+
+
+		// for (var i = 0; i < relationPlants.length; i++) {
+
+		// 	var plantId = relationPlants[i].plant2;
+		// 	//if(suggestion.id === plantId) plantId = result[i].plant2;
+			
+		// 	if(suggestion.id === plantId) continue;
+
+		// 	var plantObj = $.grep(gPlantData, function(e){return e.id == plantId})[0];
+
+		// 	if( plantObj === undefined ) {
+		// 		console.log("error: "+plantId);
+		// 	}
+
+		// 	var comment = '';
+		// 	details = ' <div class="details">' + getBuddyImage(plantId) + relationPlants[i].comment + ' <p><a class="search-link" href="#'+ plantObj.id +'" title="Find companionship for this one!">Find Companions for this one!</a></p></div>';
+
+		// 	html += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">'+ plantObj.name +'</a>' + details + '</div>';
+		// }
+
+	var getOneRelation = function(thisRelation, suggestion){
+
+			var plant1 = thisRelation.plant1;
+			var plant2 = thisRelation.plant2;
+			
+			var secondaryId;
+
+			if( plant1 === plant2 ) secondaryId = plant1;
+			else if( plant1 === suggestion.id ) secondaryId = plant2;
+			else if( plant2 === suggestion.id ) secondaryId = plant1;
+			
+			//if(suggestion.id === secondaryId) secondaryId = result[i].plant2;
+
+			var plantObj = $.grep(gPlantData, function(e){return e.id == secondaryId})[0];
+
+			if( plantObj === undefined ) {
+				console.error("error: \r\n secondaryId: "+secondaryId+ "\r\n plant1: "+plant1);
+				return false;
+			}
+
+			var str = '';
+			details = ' <div class="details"><p>' + thisRelation.comment + '</p><a class="img-hover" href="#'+ plantObj.id +'">' +getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
+			str += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">'+ plantObj.name +'</a>' + details + '</div>';
+
+			return str;
+
 	}
 
 
@@ -128,7 +164,7 @@ function Plants(){
 		for (var i = 0; i < gPlantData.length; i++) {
 			var id = gPlantData[i].id;
 			if(!plantReady(id,gPlantData[i].note)) continue;
-			html += '<li><a href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
+			html += '<li><a class="img-hover" href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
 		}
 
 		buddyGrid.html(html);
