@@ -27,7 +27,7 @@ function Plants(){
 
 		html += '<div class="note">';
 		if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p><br>';
-		html += '<p>'+suggestion.note+'</div>';
+		html += '<p>'+filterContent(suggestion.note)+'</div>';
 
 		if(result.length === 0) {
 			console.log("sorry, no hits.");
@@ -51,7 +51,7 @@ function Plants(){
 		html += '</div><div class="bad"><h3>dislikes</h3>';
 		html += buildRelations(nolikey, result, suggestion);
 
-		html += '</div><hr class="clear"/> <div class="backlink"><a href="#buddy-grid-title">Show me all the plants</a></div>';
+		html += '</div><hr class="clear"/> <div class="backlink"><a href="#buddies">Show me all the plants</a></div>';
 	  	
 	  	fadeReload(html);
 	}
@@ -148,13 +148,16 @@ function Plants(){
 			}
 
 			var str = '';
-			details = ' <div class="details"><p>' + thisRelation.comment + '</p><a class="img-hover" href="#'+ plantObj.id +'">' +getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
+			details = ' <div class="details"><p>' + filterContent(thisRelation.comment) + '</p><a class="img-hover" href="#'+ plantObj.id +'">' +getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
 			str += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">'+ plantObj.name +'</a>' + details + '</div>';
 
 			return str;
-
 	}
 
+	var filterContent = function(str){
+		
+		return str.split('$$$')[0];
+	}
 
 	var fillBuddyGrid = function(){
 

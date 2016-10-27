@@ -26,9 +26,10 @@ function Plants(){
 
 		var html = '';
 		html += getMainImage(suggestion.id);
-		if(!suggestion.alt) suggestion.alt = '/'
+		var altName = suggestion.alt;
+		if(!altName) altName = '/'
 		html += '<p class="note"><textarea id="plant-note">'+suggestion.note+'</textarea></p>';
-		html += '<pre><small><b>alt-name</b> '+suggestion.alt+' &nbsp;&nbsp; <b>id</b> '+suggestion.id+' &nbsp;&nbsp; <b>latin</b> '+ suggestion.latin + ' &nbsp;&nbsp; <b>german</b> '+ suggestion.german +'</small></pre>';
+		html += '<pre><small><b>alt-name</b> '+altName+' &nbsp;&nbsp; <b>id</b> '+suggestion.id+' &nbsp;&nbsp; <b>latin</b> '+ suggestion.latin + ' &nbsp;&nbsp; <b>german</b> '+ suggestion.german +'</small></pre>';
 
 		if(result.length === 0) {
 			console.log("sorry, no hits.");
